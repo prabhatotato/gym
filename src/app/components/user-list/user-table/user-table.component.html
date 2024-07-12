@@ -1,0 +1,36 @@
+<mat-table [dataSource]="filteredUsers" class="mat-elevation-z8">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.name}} </mat-cell>
+    </ng-container>
+  
+    <!-- Workout Column -->
+    <ng-container matColumnDef="workouts">
+      <mat-header-cell *matHeaderCellDef> Workouts </mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <app-user-row [user]="user"></app-user-row>
+      </mat-cell>
+    </ng-container>
+  
+    <!-- Expandable Detail Row -->
+    <ng-container matColumnDef="expand">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let user" [attr.colspan]="displayedColumns.length">
+        <div *ngIf="expandedElement === user">
+          <app-workout-progress [workouts]="user.workouts"></app-workout-progress>
+        </div>
+      </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+             class="example-element-row"
+             [class.example-expanded-row]="expandedElement === row"
+             (click)="toggleRow(row)">
+    </mat-row>
+    <mat-row *matRowDef="let row; columns: ['expand'];"
+             class="example-detail-row">
+    </mat-row>
+  </mat-table>
+  

@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Add New Entry</h2>
+<mat-dialog-content>
+  <form [formGroup]="entryForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>User Name</mat-label>
+      <input matInput formControlName="name" required>
+      <mat-error *ngIf="entryForm.controls['name'].hasError('required')">Name is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Workout Type</mat-label>
+      <input matInput formControlName="workoutType" required>
+      <mat-error *ngIf="entryForm.controls['workoutType'].hasError('required')">Workout type is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Workout Minutes</mat-label>
+      <input matInput type="number" formControlName="minutes" required>
+      <mat-error *ngIf="entryForm.controls['minutes'].hasError('required')">Minutes are required</mat-error>
+      <mat-error *ngIf="entryForm.controls['minutes'].hasError('min')">Minutes must be greater than 0</mat-error>
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+      <button mat-button type="button" (click)="onCancel()">Cancel</button>
+      <button mat-button color="primary" type="submit" [disabled]="entryForm.invalid">Add</button>
+    </div>
+  </form>
+</mat-dialog-content>

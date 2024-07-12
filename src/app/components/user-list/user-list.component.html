@@ -1,0 +1,19 @@
+<div class="p-4">
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Search by username</mat-label>
+      <input matInput [(ngModel)]="searchQuery" placeholder="Enter username">
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Filter by workout type</mat-label>
+      <mat-select [(ngModel)]="selectedWorkoutType">
+        <mat-option *ngFor="let type of workoutTypes" [value]="type">{{ type }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <app-user-table [searchQuery]="searchQuery" [selectedWorkoutType]="selectedWorkoutType"></app-user-table>
+  
+    <mat-paginator [length]="totalUsers" [pageSize]="5" (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
+  
